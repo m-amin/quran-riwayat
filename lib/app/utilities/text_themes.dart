@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextThemes {
   TextThemes._();
 
   static TextStyle largeSubTitle =
-      const TextStyle(fontSize: 18, fontFamily: 'Roboto');
+      TextStyle(fontSize: 18.sp, fontFamily: 'Roboto');
   static TextStyle mediumSubTitle =
-      const TextStyle(fontSize: 14, fontFamily: 'Roboto');
+      TextStyle(fontSize: 14.sp, fontFamily: 'Roboto');
   static TextStyle smallSubTitle =
-      const TextStyle(fontSize: 12, fontFamily: 'Roboto');
+      TextStyle(fontSize: 12.sp, fontFamily: 'Roboto');
 
-  static TextStyle smallBoldSubTitle = const TextStyle(
-      fontSize: 12, fontFamily: 'Roboto', fontWeight: FontWeight.bold);
+  static TextStyle smallBoldSubTitle = TextStyle(
+      fontSize: 12.sp, fontFamily: 'Roboto', fontWeight: FontWeight.bold);
 
-  static TextStyle mediumBoldSubTitle = const TextStyle(
-      fontSize: 14, fontFamily: 'Roboto', fontWeight: FontWeight.bold);
+  static TextStyle mediumBoldSubTitle = TextStyle(
+      fontSize: 14.sp, fontFamily: 'Roboto', fontWeight: FontWeight.bold);
 
-  static TextStyle largeBoldSubTitle = const TextStyle(
-      fontSize: 18, fontFamily: 'Roboto', fontWeight: FontWeight.bold);
+  static TextStyle largeBoldSubTitle = TextStyle(
+      fontSize: 18.sp, fontFamily: 'Roboto', fontWeight: FontWeight.bold);
 }
