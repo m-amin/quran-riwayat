@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:quran_riwayat/app/pages/home/controller/home_controller.dart';
+import 'package:quran_riwayat/app/pages/reader/view/reader_view.dart';
 
 import '../../../utilities/app_colors.dart';
 
@@ -31,7 +31,10 @@ class HomePage extends StatelessWidget {
             itemCount: controller.quranBooks.length,
             padding: EdgeInsets.all(10.w),
             itemBuilder: (context, index) => InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.to(
+                    () => ReaderPage(docId: controller.quranBooks[index].id));
+              },
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -84,8 +87,8 @@ class SliverAppBarBackground extends StatelessWidget {
       children: [
         const Spacer(),
         SizedBox(
-          width: 0.35.sh,
-          height: 0.35.sh,
+          width: 0.30.sh,
+          height: 0.30.sh,
           child: SvgPicture.asset(
             'assets/vectors/quran_logo.svg',
             fit: BoxFit.fill,
