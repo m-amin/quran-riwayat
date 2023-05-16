@@ -6,6 +6,7 @@ import 'package:quran_riwayat/app/pages/home/controller/home_controller.dart';
 import 'package:quran_riwayat/app/pages/reader/view/reader_view.dart';
 
 import '../../../utilities/app_colors.dart';
+import '../../../utilities/text_themes.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: AppColors.goldColor,
+                      color: AppColors.borderColor,
                     ),
                     color: Colors.white),
                 child: Padding(
@@ -53,7 +54,9 @@ class HomePage extends StatelessWidget {
                       height: 10.h,
                     ),
                     FittedBox(
-                        child: Text(controller.quranBooks[index].arabicName)),
+                      child: Text(controller.quranBooks[index].arabicName,
+                          style: TextThemes.mediumSubTitle),
+                    ),
                     SizedBox(
                       height: 10.h,
                     ),
@@ -61,6 +64,9 @@ class HomePage extends StatelessWidget {
                       child: Text(
                         controller.quranBooks[index].englishName,
                       ),
+                    ),
+                    SizedBox(
+                      height: 5.h,
                     ),
                   ]),
                 ),

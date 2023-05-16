@@ -7,6 +7,6 @@ class AppConstants {
   static const appName = 'Quran Riwayat';
 
   static final appTheme = ThemeData.light().copyWith(
-    colorScheme: ColorScheme.fromSwatch(accentColor: AppColors.goldColor),
+    colorScheme: ColorScheme.fromSwatch(accentColor: AppColors.lightGreenColor),
   );
 }
