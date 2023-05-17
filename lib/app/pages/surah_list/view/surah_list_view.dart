@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:quran_riwayat/app/pages/reader/view/reader_view.dart';
 
 import '../../../utilities/app_colors.dart';
@@ -54,8 +53,8 @@ class SurahsPage extends StatelessWidget {
                                 .copyWith(top: 0.1.sh, bottom: 0.02.sh),
                             child: SizedBox(
                               height: 0.08.sh,
-                              child: const TextField(
-                                decoration: InputDecoration(
+                              child: TextField(
+                                decoration: const InputDecoration(
                                   hintText: 'بحث',
                                   hintStyle: TextThemes.hintStyle,
                                   filled: true,
@@ -80,20 +79,20 @@ class SurahsPage extends StatelessWidget {
                                     color: AppColors.greenColor,
                                   ),
                                 ),
+                                onChanged: (text) {
+                                  controller.search(text);
+                                },
                               ),
                             ),
                           ),
                         ),
                         title: Row(
                           children: [
-                            InkWell(
-                              onTap: () => controller.getJsonData(),
-                              child: Image(
-                                image: AssetImage(
-                                    'assets/imgs/cover${controller.args['selected_book']?.id}.png'),
-                                width: 25.w,
-                                height: 50.w,
-                              ),
+                            Image(
+                              image: AssetImage(
+                                  'assets/imgs/cover${controller.args['selected_book']?.id}.png'),
+                              width: 25.w,
+                              height: 50.w,
                             ),
                             SizedBox(
                               width: 10.w,
@@ -112,8 +111,6 @@ class SurahsPage extends StatelessWidget {
                           color: AppColors.dullBlackColor,
                         ),
                         centerTitle: false,
-                        // toolbarHeight: 0.25.sh,
-                        // collapsedHeight: 0.25.sh,
                         pinned: true,
                       ),
                     ],
@@ -128,22 +125,54 @@ class SurahsPage extends StatelessWidget {
                         child: Text('Unexpected error has occurred'),
                       );
                     } else {
-                      return ListView.builder(
-                        itemCount: controller.surahs.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              Get.to(() => ReaderPage(
-                                  docId: controller.args['selected_book']?.id ??
-                                      0));
-                            },
-                            child: SurahWidget(
-                              surahs: controller.surahs,
-                              index: index,
+                      if (controller.displayedSurahs.isEmpty) {
+                        return Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color:
+                                  AppColors.lightGreenColor.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                          );
-                        },
-                      );
+                            child: Padding(
+                              padding: EdgeInsets.all(0.05.sw),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.search_off),
+                                  Text(
+                                    'No results found.',
+                                    style: TextThemes.mediumSubTitle,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return ListView.builder(
+                          itemCount: controller.displayedSurahs.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                Get.to(() => ReaderPage(
+                                      docId: controller
+                                              .args['selected_book']?.id ??
+                                          0,
+                                      initialPage: 605 -
+                                          int.parse(controller
+                                                  .displayedSurahs[index]
+                                                  .pages ??
+                                              '604'),
+                                    ));
+                              },
+                              child: SurahWidget(
+                                surahs: controller.displayedSurahs,
+                                index: index,
+                              ),
+                            );
+                          },
+                        );
+                      }
                     }
                   }
                 })),

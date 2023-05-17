@@ -8,7 +8,8 @@ import '../../home/model/book_model.dart';
 
 class SurahsController extends GetxController {
   Map<String, Book> args = Get.arguments[0];
-  var surahs = <Surah>[].obs;
+  var allSurahs = <Surah>[].obs;
+  var displayedSurahs = <Surah>[].obs;
   var isLoading = false.obs;
   var isFailed = false.obs;
 
@@ -19,6 +20,7 @@ class SurahsController extends GetxController {
     super.onInit();
   }
 
+  /// Provides the surahs list to display in the Listview
   void getJsonData() async {
     // read asset json file and convert to string then to json Map
     isLoading(true);
@@ -26,10 +28,11 @@ class SurahsController extends GetxController {
       DefaultAssetBundle.of(Get.arguments[1]['context'])
           .loadString("assets/json/surahs.json")
           .then((value) {
-        print(value);
-
+        // convert the json string to a list of surah to use in listview
         if (value.isNotEmpty) {
-          surahs.value = surahsFromJson(value);
+          allSurahs.value = surahsFromJson(value);
+          displayedSurahs(
+              allSurahs); //assigned the surahs list to display all surahs when searchBox not used or empty
         }
 
         isLoading(false);
@@ -37,11 +40,24 @@ class SurahsController extends GetxController {
       });
     } catch (e) {
       print('error reading json :\n $e');
+
       isLoading(false);
       isFailed(true);
     }
+  }
 
-    print(surahs.length);
-    print(surahs.last.title);
+  /// Changes the displayed surahs list based on searched string
+  void search(String text) {
+    //if empty then display all surahs
+    if (text.isEmpty) {
+      displayedSurahs(allSurahs);
+    } else {
+      displayedSurahs.value = allSurahs.where((surah) {
+        var surahNameEn = surah.title?.toLowerCase() ?? '';
+        var surahNameAr = surah.titleAr ?? '';
+        return surahNameEn.contains(text.toLowerCase()) ||
+            surahNameAr.contains(text);
+      }).toList();
+    }
   }
 }

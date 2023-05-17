@@ -8,5 +8,8 @@ class AppConstants {
 
   static final appTheme = ThemeData.light().copyWith(
     colorScheme: ColorScheme.fromSwatch(accentColor: AppColors.lightGreenColor),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.greenColor,
+    ),
   );
 }

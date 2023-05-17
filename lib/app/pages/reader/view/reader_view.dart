@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
 
 class ReaderPage extends StatelessWidget {
-  const ReaderPage({Key? key, required this.docId}) : super(key: key);
+  const ReaderPage({Key? key, required this.docId, this.initialPage})
+      : super(key: key);
 
   final int docId;
-
+  final int? initialPage;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -13,7 +14,7 @@ class ReaderPage extends StatelessWidget {
         body: PdfView(
           controller: PdfController(
               document: PdfDocument.openAsset('assets/docs/$docId.pdf'),
-              initialPage: 604),
+              initialPage: initialPage ?? 604),
           scrollDirection: Axis.horizontal,
           pageSnapping: true,
         ),
