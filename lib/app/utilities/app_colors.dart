@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static Color background = const Color(0xFFFAFAFA);
-  static Color goldColor = const Color.fromARGB(255, 239, 214, 157);
-  static Color greenColor = const Color(0XFF009B9F);
-  static Color lightGreenColor = const Color(0XFF6ED0C9);
-  static Color borderColor = const Color(0xFFA1A1A1);
+  static const Color background = Color(0xFFFAFAFA);
+  static const Color goldColor = Color.fromARGB(255, 239, 214, 157);
+  static const Color whiteColor = Color.fromARGB(255, 255, 255, 255);
+  static const Color greenColor = Color(0XFF009B9F);
+  static const Color lightGreenColor = Color(0XFF6ED0C9);
+  static const Color ultraLightGreenColor = Color(0XFFDEF2F0);
+  static const Color dullBlackColor = Color.fromARGB(255, 22, 22, 22);
+  static const Color borderColor = Color(0xFFB1B1B1);
+  static const Color hintColor = Color.fromARGB(255, 128, 128, 128);
 }

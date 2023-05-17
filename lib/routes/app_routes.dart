@@ -7,4 +7,5 @@ abstract class Routes {
 
 class Paths {
   static const HOME = "/";
+  static const SUHRAS = "/surahs";
 }

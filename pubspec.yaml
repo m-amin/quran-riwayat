@@ -45,6 +45,7 @@ dependencies:
 flutter_native_splash:
   android: true
   ios: true
+  web: false
   color: "#FAFAFA"
   image: "assets/imgs/logo.png"
 
@@ -75,6 +76,7 @@ flutter:
     - assets/vectors/
     - assets/imgs/
     - assets/docs/
+    - assets/json/
 
 
   fonts:

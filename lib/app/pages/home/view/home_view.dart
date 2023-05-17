@@ -4,9 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:quran_riwayat/app/pages/home/controller/home_controller.dart';
 import 'package:quran_riwayat/app/pages/reader/view/reader_view.dart';
+import 'package:quran_riwayat/routes/app_pages.dart';
 
 import '../../../utilities/app_colors.dart';
 import '../../../utilities/text_themes.dart';
+import '../../surah_list/view/surah_list_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,8 +35,11 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.all(10.w),
             itemBuilder: (context, index) => InkWell(
               onTap: () {
-                Get.to(
-                    () => ReaderPage(docId: controller.quranBooks[index].id));
+                // Get.to( () => ReaderPage(docId: controller.quranBooks[index].id));
+                Get.toNamed(Paths.SUHRAS, arguments: [
+                  {"selected_book": controller.quranBooks[index]},
+                  {'context': context}
+                ]);
               },
               child: Container(
                 decoration: BoxDecoration(
