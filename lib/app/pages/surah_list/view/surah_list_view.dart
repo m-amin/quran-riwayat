@@ -54,27 +54,27 @@ class SurahsPage extends StatelessWidget {
                             child: SizedBox(
                               height: 0.08.sh,
                               child: TextField(
-                                decoration: const InputDecoration(
-                                  hintText: 'بحث',
+                                decoration: InputDecoration(
+                                  hintText: 'Search'.tr,
                                   hintStyle: TextThemes.hintStyle,
                                   filled: true,
                                   isDense: true,
                                   fillColor: Colors.white,
                                   border: InputBorder.none,
-                                  contentPadding: EdgeInsets.all(10),
-                                  focusedBorder: OutlineInputBorder(
+                                  contentPadding: const EdgeInsets.all(10),
+                                  focusedBorder: const OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: AppColors.greenColor),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(6)),
                                   ),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: AppColors.whiteColor),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(6)),
                                   ),
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.search,
                                     color: AppColors.greenColor,
                                   ),
@@ -121,8 +121,8 @@ class SurahsPage extends StatelessWidget {
                     );
                   } else {
                     if (controller.isFailed.value) {
-                      return const Center(
-                        child: Text('Unexpected error has occurred'),
+                      return Center(
+                        child: Text('Unexpected error has occurred'.tr),
                       );
                     } else {
                       if (controller.displayedSurahs.isEmpty) {
@@ -140,7 +140,7 @@ class SurahsPage extends StatelessWidget {
                                 children: [
                                   const Icon(Icons.search_off),
                                   Text(
-                                    'No results found.',
+                                    'No results found.'.tr,
                                     style: TextThemes.mediumSubTitle,
                                   )
                                 ],
@@ -203,19 +203,17 @@ class SurahWidget extends StatelessWidget {
             color: AppColors.background.withOpacity(0.75)),
         child: Row(
           children: <Widget>[
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(surahs[index].pages ?? ''),
-                Text(
-                  'صفحة',
-                  style: TextThemes.smallSubTitle,
-                )
-              ],
+            SizedBox(
+              width: 0.1.sw,
+              height: 0.1.sw,
+              child: SvgPicture.asset(
+                'assets/vectors/${surahs[index].place?.toLowerCase()}.svg',
+                fit: BoxFit.fill,
+              ),
             ),
-            const Spacer(),
+            const SizedBox(
+              width: 15,
+            ),
             Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -231,17 +229,19 @@ class SurahWidget extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(
-              width: 15,
+            const Spacer(),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(surahs[index].pages ?? ''),
+                Text(
+                  'Page'.tr,
+                  style: TextThemes.smallSubTitle,
+                )
+              ],
             ),
-            SizedBox(
-              width: 0.1.sw,
-              height: 0.1.sw,
-              child: SvgPicture.asset(
-                'assets/vectors/${surahs[index].place?.toLowerCase()}.svg',
-                fit: BoxFit.fill,
-              ),
-            )
           ],
         ).marginSymmetric(horizontal: 20, vertical: 10),
       ),
