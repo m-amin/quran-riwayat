@@ -4,7 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:quran_riwayat/app/pages/surah_list/model/surah_model.dart';
 
+import '../../../utilities/utilities.dart';
+import '../../../utilities/variables.dart';
 import '../../home/model/book_model.dart';
+import '../../reader/view/reader_view.dart';
 
 class SurahsController extends GetxController {
   Map<String, Book> args = Get.arguments[0];
@@ -59,5 +62,30 @@ class SurahsController extends GetxController {
             surahNameAr.contains(text);
       }).toList();
     }
+  }
+
+  /// when user clicks on a surah it :
+  /// 1 : send them to reader page
+  /// 2 : stores the bookId and page to storage
+  /// 3 : updates the global variables
+  void surahWidgetClicked(int index) {
+    Get.to(() => ReaderPage(
+          docId: args['selected_book']?.id ?? 0,
+          initialPage: 605 - int.parse(displayedSurahs[index].pages ?? '604'),
+        ));
+
+    if (args['selected_book']?.id != null &&
+        displayedSurahs[index].pages != null) {
+      storeLastPage(
+          '${args['selected_book']?.id}', displayedSurahs[index].pages!);
+
+      AppVariables.lastPage = displayedSurahs[index].pages!;
+      AppVariables.bookId = '${args['selected_book']?.id}';
+    }
+  }
+
+  void storeLastPage(String bookId, String bookPage) {
+    StorageUtility.saveInStorage('book_id', bookId);
+    StorageUtility.saveInStorage('last_page', bookPage);
   }
 }

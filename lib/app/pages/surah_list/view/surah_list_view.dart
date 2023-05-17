@@ -6,6 +6,7 @@ import 'package:quran_riwayat/app/pages/reader/view/reader_view.dart';
 
 import '../../../utilities/app_colors.dart';
 import '../../../utilities/text_themes.dart';
+import '../../../utilities/variables.dart';
 import '../controller/surah_list_controller.dart';
 import '../model/surah_model.dart';
 
@@ -154,16 +155,7 @@ class SurahsPage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                Get.to(() => ReaderPage(
-                                      docId: controller
-                                              .args['selected_book']?.id ??
-                                          0,
-                                      initialPage: 605 -
-                                          int.parse(controller
-                                                  .displayedSurahs[index]
-                                                  .pages ??
-                                              '604'),
-                                    ));
+                                controller.surahWidgetClicked(index);
                               },
                               child: SurahWidget(
                                 surahs: controller.displayedSurahs,

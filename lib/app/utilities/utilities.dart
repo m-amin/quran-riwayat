@@ -29,8 +29,14 @@ class StorageUtility {
     box.write(key, value);
   }
 
-  static Future<String?> readFromStorage(String key) async {
-    return box.read(key);
+  static void saveInStorageMap(String key, Map<String, String> value) {
+    box.write(key, value);
+  }
+
+  static Map<String, dynamic>? readFromStorageMap(String key) {
+    Map<String, dynamic>? value = box.read(key);
+
+    return value;
   }
 
   static String? readKey(String key) {

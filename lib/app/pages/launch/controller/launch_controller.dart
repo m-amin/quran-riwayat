@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:quran_riwayat/app/utilities/app_colors.dart';
 import 'package:quran_riwayat/app/utilities/text_themes.dart';
 import 'package:quran_riwayat/app/utilities/utilities.dart';
+import 'package:quran_riwayat/app/utilities/variables.dart';
 
 import '../../../widgets/widgets.dart';
+import '../../reader/view/reader_view.dart';
 import '../widgets/languages_widget.dart';
 
 class LaunchController extends GetxController {
@@ -24,7 +26,30 @@ class LaunchController extends GetxController {
             orElse: () => 'English')
         .obs;
 
+    checkReadBefore();
+
     super.onInit();
+  }
+
+  /// will make button visible if bookId and lastPage are found in storage
+  void checkReadBefore() {
+    String? bookId = StorageUtility.readKey('book_id');
+    String? lastPage = StorageUtility.readKey('last_page');
+    if (bookId == null || lastPage == null) {
+      hasRead = false;
+    } else {
+      hasRead = true;
+      AppVariables.lastPage = lastPage;
+      AppVariables.bookId = bookId;
+    }
+  }
+
+  /// will be used when button is visible and clicked
+  void continueReadingClicked() {
+    Get.to(() => ReaderPage(
+          docId: int.parse(AppVariables.bookId!),
+          initialPage: 605 - int.parse(AppVariables.lastPage!),
+        ));
   }
 
   void menuButtonClicked() {

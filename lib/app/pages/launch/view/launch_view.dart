@@ -82,9 +82,11 @@ class LaunchPage extends StatelessWidget {
               ),
 
               /// only show continue reading button when a book has been opened
-              if (!controller.hasRead)
+              if (controller.hasRead)
                 LaunchPageButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.continueReadingClicked();
+                  },
                   child: Row(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
