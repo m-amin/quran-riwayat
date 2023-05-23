@@ -38,11 +38,11 @@ class BottomSheetWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(
                   vertical: verticalPadding ?? 0.06.sw,
                   horizontal: horizontalPadding ?? 0.06.sw)
-              .copyWith(top: 0.03.sw),
+              .copyWith(top: 10.h),
           child: Column(
             children: [
               Container(
-                width: 0.0966.sw,
+                width: 30.w,
                 height: 6,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
@@ -85,13 +85,12 @@ class BottomSheetTile extends StatelessWidget {
       children: [
         ListTile(
           onTap: onPressed,
-          horizontalTitleGap: 0,
+          horizontalTitleGap: 5.w,
           leading: icon,
           title: Text(
             title,
             style: textStyle ??
-                TextThemes.largeSubTitle
-                    .copyWith(color: textColor, fontSize: 18.sp),
+                TextThemes.mediumSubTitle.copyWith(color: textColor),
           ),
           trailing: trailing ?? const SizedBox(),
         ),

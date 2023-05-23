@@ -56,17 +56,26 @@ class LaunchController extends GetxController {
     popUpBottomMenu(
         context: context,
         child: BottomSheetWidget(
+          bottomSpacing: 0,
           child: [
             BottomSheetTile(
               title: 'Language'.tr,
-              icon: const Icon(Icons.translate, color: AppColors.greenColor),
+              icon: Icon(
+                Icons.translate,
+                color: AppColors.greenColor,
+                size: 12.sp,
+              ),
               onPressed: () {
                 languagesTilePressed();
               },
             ),
             BottomSheetTile(
               title: 'About'.tr,
-              icon: const Icon(Icons.info_outline, color: AppColors.greenColor),
+              icon: Icon(
+                Icons.info_outline,
+                color: AppColors.greenColor,
+                size: 12.sp,
+              ),
               onPressed: () {
                 aboutTilePressed();
               },
@@ -107,8 +116,13 @@ class LaunchController extends GetxController {
       isScrollController: true,
       context: context,
       child: Obx(() {
-        return BottomSheetWidget(
-            height: 0.75.sh, bottomSpacing: 0, child: languagesList(context));
+        return BottomSheetWidget(height: 0.75.sh, bottomSpacing: 0, child: [
+          Expanded(
+            child: ListView(
+              children: languagesList(context),
+            ),
+          ),
+        ]);
       }),
     );
   }

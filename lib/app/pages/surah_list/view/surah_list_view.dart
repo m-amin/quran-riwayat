@@ -96,11 +96,13 @@ class SurahsPage extends StatelessWidget {
                             SizedBox(
                               width: 10.w,
                             ),
-                            Text(
-                              controller.args['selected_book']?.arabicName ??
-                                  '',
-                              style: TextThemes.largeSubTitle
-                                  .copyWith(color: Colors.black),
+                            FittedBox(
+                              child: Text(
+                                controller.args['selected_book']?.arabicName ??
+                                    '',
+                                style: TextThemes.largeSubTitle
+                                    .copyWith(color: Colors.black),
+                              ),
                             ),
                           ],
                         ),

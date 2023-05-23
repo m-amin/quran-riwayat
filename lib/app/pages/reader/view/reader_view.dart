@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
+import 'package:quran_riwayat/app/utilities/app_colors.dart';
 
 import '../../../utilities/utilities.dart';
 import '../../../utilities/variables.dart';
@@ -16,6 +17,20 @@ class ReaderPage extends StatelessWidget {
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Scaffold(
+          backgroundColor: AppColors.whiteColor,
+          appBar: AppBar(
+              leading: const BackButton(
+                color: AppColors.dullBlackColor,
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.find_in_page_outlined,
+                      color: AppColors.dullBlackColor),
+                  onPressed: () {},
+                )
+              ],
+              elevation: 0,
+              backgroundColor: AppColors.whiteColor),
           body: PdfView(
             controller: PdfController(
                 document: PdfDocument.openAsset('assets/docs/$docId.pdf'),
