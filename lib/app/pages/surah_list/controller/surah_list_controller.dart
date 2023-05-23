@@ -71,7 +71,7 @@ class SurahsController extends GetxController {
   void surahWidgetClicked(int index) {
     Get.to(() => ReaderPage(
           docId: args['selected_book']?.id ?? 0,
-          initialPage: 605 - int.parse(displayedSurahs[index].pages ?? '604'),
+          initialPage: int.parse(displayedSurahs[index].pages ?? '0'),
         ));
 
     if (args['selected_book']?.id != null &&

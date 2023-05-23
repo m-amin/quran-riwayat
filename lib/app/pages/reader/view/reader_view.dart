@@ -14,33 +14,36 @@ class ReaderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Scaffold(
-          backgroundColor: AppColors.whiteColor,
-          appBar: AppBar(
-              leading: const BackButton(
-                color: AppColors.dullBlackColor,
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.find_in_page_outlined,
+      child: Scaffold(
+        backgroundColor: AppColors.whiteColor,
+        appBar: AppBar(
+            leading: const BackButton(
+              color: AppColors.dullBlackColor,
+            ),
+            actions: [
+              IconButton(
+                icon: const Tooltip(
+                  message: "Go to Page",
+                  child: Icon(Icons.find_in_page_outlined,
                       color: AppColors.dullBlackColor),
-                  onPressed: () {},
-                )
-              ],
-              elevation: 0,
-              backgroundColor: AppColors.whiteColor),
-          body: PdfView(
+                ),
+                onPressed: () {},
+              )
+            ],
+            elevation: 0,
+            backgroundColor: AppColors.whiteColor),
+        body: Directionality(
+          textDirection: TextDirection.rtl,
+          child: PdfView(
             controller: PdfController(
                 document: PdfDocument.openAsset('assets/docs/$docId.pdf'),
-                initialPage: initialPage ?? 604),
+                initialPage: initialPage ?? 0),
             scrollDirection: Axis.horizontal,
             pageSnapping: true,
             onPageChanged: (int pageNumber) {
               // store new page into storage with every flip
-              StorageUtility.saveInStorage('last_page', '${605 - pageNumber}');
-              AppVariables.lastPage = '${605 - pageNumber}';
+              StorageUtility.saveInStorage('last_page', '$pageNumber');
+              AppVariables.lastPage = '$pageNumber';
             },
           ),
         ),

@@ -48,7 +48,7 @@ class LaunchController extends GetxController {
   void continueReadingClicked() {
     Get.to(() => ReaderPage(
           docId: int.parse(AppVariables.bookId!),
-          initialPage: 605 - int.parse(AppVariables.lastPage!),
+          initialPage: int.parse(AppVariables.lastPage!),
         ));
   }
 
