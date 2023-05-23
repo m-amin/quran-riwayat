@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:quran_riwayat/app/utilities/app_colors.dart';
 
 import '../../../utilities/utilities.dart';
 import '../../../utilities/variables.dart';
+import '../controller/reader_controller.dart';
 
 class ReaderPage extends StatelessWidget {
-  const ReaderPage({Key? key, required this.docId, this.initialPage})
-      : super(key: key);
+  const ReaderPage({Key? key}) : super(key: key);
 
-  final int docId;
-  final int? initialPage;
   @override
   Widget build(BuildContext context) {
+    ReaderController controller = Get.put(ReaderController(context));
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.whiteColor,
@@ -22,12 +23,10 @@ class ReaderPage extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                icon: const Tooltip(
-                  message: "Go to Page",
-                  child: Icon(Icons.find_in_page_outlined,
-                      color: AppColors.dullBlackColor),
-                ),
-                onPressed: () {},
+                icon: const Icon(Icons.find_in_page_outlined,
+                    color: AppColors.dullBlackColor),
+                tooltip: 'Go to Page'.tr,
+                onPressed: () => controller.onPageSearchClicked(),
               )
             ],
             elevation: 0,
@@ -35,15 +34,13 @@ class ReaderPage extends StatelessWidget {
         body: Directionality(
           textDirection: TextDirection.rtl,
           child: PdfView(
-            controller: PdfController(
-                document: PdfDocument.openAsset('assets/docs/$docId.pdf'),
-                initialPage: initialPage ?? 0),
+            controller: controller.pdfController,
             scrollDirection: Axis.horizontal,
             pageSnapping: true,
-            onPageChanged: (int pageNumber) {
-              // store new page into storage with every flip
-              StorageUtility.saveInStorage('last_page', '$pageNumber');
-              AppVariables.lastPage = '$pageNumber';
+            onPageChanged: (int pageNumber) =>
+                controller.onPageChanged(pageNumber),
+            onDocumentError: (error) {
+              Toast.defaultToast(context, 'Unexpected error has occurred'.tr);
             },
           ),
         ),

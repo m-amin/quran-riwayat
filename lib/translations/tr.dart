@@ -7,5 +7,8 @@ const Map<String, String> tr = {
   'Page': 'Sayfa',
   'Surah': 'Sure',
   'No results found.': 'Sonuç bulunamadı.',
-  'Unexpected error has occurred': 'Beklenmeyen bir hata oluştu'
+  'Unexpected error has occurred': 'Beklenmeyen bir hata oluştu',
+  'Go to Page': 'Sayfaya Git',
+  'Please Enter Page Number': 'Lütfen Sayfa Numarasını Giriniz',
+  'Invalid Number...': 'Geçersiz numara...',
 };

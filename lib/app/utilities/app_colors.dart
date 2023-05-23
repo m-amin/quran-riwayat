@@ -15,4 +15,6 @@ class AppColors {
   static const Color dullBlackColor = Color.fromARGB(255, 22, 22, 22);
   static const Color borderColor = Color(0xFFB1B1B1);
   static const Color hintColor = Color.fromARGB(255, 128, 128, 128);
+  static const Color errorColor = Color.fromARGB(255, 255, 148, 148);
+  static const Color disabledColor = Color.fromARGB(255, 211, 211, 211);
 }

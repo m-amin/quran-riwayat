@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:quran_riwayat/app/pages/launch/view/launch_view.dart';
+import 'package:quran_riwayat/app/pages/reader/view/reader_view.dart';
 import 'package:quran_riwayat/app/pages/surah_list/view/surah_list_view.dart';
 
 import '../app/pages/home/view/home_view.dart';
@@ -23,6 +24,10 @@ class AppPages {
     GetPage(
       name: Paths.SUHRAS,
       page: () => const SurahsPage(),
+    ),
+    GetPage(
+      name: Paths.READER,
+      page: () => const ReaderPage(),
     ),
   ];
 }

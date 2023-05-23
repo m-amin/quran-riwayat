@@ -7,5 +7,8 @@ const Map<String, String> ar = {
   'Page': 'صفحة',
   'Surah': 'سورة',
   'No results found.': 'لم يتم العثور على نتائج',
-  'Unexpected error has occurred': 'حدث خطأ غير متوقع'
+  'Unexpected error has occurred': 'حدث خطأ غير متوقع',
+  'Go to Page': 'اذهب الى الصفحة',
+  'Please Enter Page Number': 'الرجاء كتابة رقم الصفحة',
+  'Invalid Number...': 'خطأ في الرقم',
 };

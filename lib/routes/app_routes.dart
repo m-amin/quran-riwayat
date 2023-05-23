@@ -9,4 +9,5 @@ class Paths {
   static const LAUNCH = "/";
   static const HOME = "/home";
   static const SUHRAS = "/surahs";
+  static const READER = "/reader";
 }

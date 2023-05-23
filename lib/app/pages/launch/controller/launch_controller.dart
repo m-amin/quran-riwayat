@@ -6,6 +6,7 @@ import 'package:quran_riwayat/app/utilities/text_themes.dart';
 import 'package:quran_riwayat/app/utilities/utilities.dart';
 import 'package:quran_riwayat/app/utilities/variables.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../widgets/widgets.dart';
 import '../../reader/view/reader_view.dart';
 import '../widgets/languages_widget.dart';
@@ -46,10 +47,21 @@ class LaunchController extends GetxController {
 
   /// will be used when button is visible and clicked
   void continueReadingClicked() {
-    Get.to(() => ReaderPage(
-          docId: int.parse(AppVariables.bookId!),
-          initialPage: int.parse(AppVariables.lastPage!),
-        ));
+    // Get.to(() => ReaderPage(
+    //       docId: int.parse(AppVariables.bookId!),
+    //       initialPage: int.parse(AppVariables.lastPage!),
+    //     ));
+    Get.toNamed(
+      Paths.READER,
+      arguments: [
+        {
+          'docId': int.parse(AppVariables.bookId!),
+        },
+        {
+          'initialPage': int.parse(AppVariables.lastPage!),
+        },
+      ],
+    );
   }
 
   void menuButtonClicked() {
@@ -63,7 +75,7 @@ class LaunchController extends GetxController {
               icon: Icon(
                 Icons.translate,
                 color: AppColors.greenColor,
-                size: 12.sp,
+                size: 14.sp,
               ),
               onPressed: () {
                 languagesTilePressed();
@@ -74,7 +86,7 @@ class LaunchController extends GetxController {
               icon: Icon(
                 Icons.info_outline,
                 color: AppColors.greenColor,
-                size: 12.sp,
+                size: 14.sp,
               ),
               onPressed: () {
                 aboutTilePressed();

@@ -37,7 +37,6 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.all(10.w),
             itemBuilder: (context, index) => InkWell(
               onTap: () {
-                // Get.to( () => ReaderPage(docId: controller.quranBooks[index].id));
                 Get.toNamed(Paths.SUHRAS, arguments: [
                   {"selected_book": controller.quranBooks[index]},
                   {'context': context}

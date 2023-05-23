@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:quran_riwayat/app/pages/surah_list/model/surah_model.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../utilities/utilities.dart';
 import '../../../utilities/variables.dart';
 import '../../home/model/book_model.dart';
@@ -69,10 +70,20 @@ class SurahsController extends GetxController {
   /// 2 : stores the bookId and page to storage
   /// 3 : updates the global variables
   void surahWidgetClicked(int index) {
-    Get.to(() => ReaderPage(
-          docId: args['selected_book']?.id ?? 0,
-          initialPage: int.parse(displayedSurahs[index].pages ?? '0'),
-        ));
+    // Get.to(() => ReaderPage(
+    //       docId: args['selected_book']?.id ?? 0,
+    //       initialPage: int.parse(displayedSurahs[index].pages ?? '0'),
+    //     ));
+
+    Get.toNamed(
+      Paths.READER,
+      arguments: [
+        {'docId': args['selected_book']?.id ?? 0},
+        {
+          'initialPage': int.parse(displayedSurahs[index].pages ?? '0'),
+        },
+      ],
+    );
 
     if (args['selected_book']?.id != null &&
         displayedSurahs[index].pages != null) {
