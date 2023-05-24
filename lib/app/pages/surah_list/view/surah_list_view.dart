@@ -39,53 +39,16 @@ class SurahsPage extends StatelessWidget {
               ),
             ),
             NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                      SliverAppBar(
-                        expandedHeight: 0.1.sh + AppBar().preferredSize.height,
-                        backgroundColor: AppColors.ultraLightGreenColor,
-                        elevation: 1,
-                        floating: true,
-                        snap: true,
-                        flexibleSpace: FlexibleSpaceBar(
-                          background: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20)
-                                .copyWith(top: 0.1.sh, bottom: 0.02.sh),
-                            child: SizedBox(
-                              height: 0.08.sh,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'Search'.tr,
-                                  hintStyle: TextThemes.hintStyle,
-                                  filled: true,
-                                  isDense: true,
-                                  fillColor: Colors.white,
-                                  border: InputBorder.none,
-                                  contentPadding: const EdgeInsets.all(10),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: AppColors.greenColor),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(6)),
-                                  ),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: AppColors.whiteColor),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(6)),
-                                  ),
-                                  prefixIcon: const Icon(
-                                    Icons.search,
-                                    color: AppColors.greenColor,
-                                  ),
-                                ),
-                                onChanged: (text) {
-                                  controller.search(text);
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        title: Row(
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  toolbarHeight: !innerBoxIsScrolled ? 1.5 * 50.w : 50.h,
+                  backgroundColor: AppColors.ultraLightGreenColor,
+                  elevation: 1,
+                  floating: true,
+                  snap: true,
+                  title: !innerBoxIsScrolled
+                      ? Row(
                           children: [
                             Image(
                               image: AssetImage(
@@ -105,69 +68,122 @@ class SurahsPage extends StatelessWidget {
                               ),
                             ),
                           ],
-                        ),
-                        titleSpacing: 0,
-                        automaticallyImplyLeading: false,
-                        leading: const BackButton(
+                        )
+                      : const SizedBox(),
+                  titleSpacing: 0,
+                  automaticallyImplyLeading: false,
+                  leading: !innerBoxIsScrolled
+                      ? const BackButton(
                           color: AppColors.dullBlackColor,
-                        ),
-                        centerTitle: false,
-                        pinned: true,
+                        )
+                      : const SizedBox(),
+                  centerTitle: false,
+                  pinned: false,
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(30.h),
+                    child: Container(
+                      padding: innerBoxIsScrolled
+                          ? EdgeInsetsDirectional.fromSTEB(0, 0, 10.w, 15.h)
+                          : EdgeInsets.symmetric(horizontal: 10.w)
+                              .copyWith(top: 5, bottom: 10.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          innerBoxIsScrolled
+                              ? const BackButton(
+                                  color: AppColors.dullBlackColor,
+                                )
+                              : const SizedBox(),
+                          Expanded(
+                              child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Search'.tr,
+                              hintStyle: TextThemes.hintStyle,
+                              filled: true,
+                              isDense: true,
+                              fillColor: Colors.white,
+                              border: InputBorder.none,
+                              contentPadding: const EdgeInsets.all(10),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.greenColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6)),
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: AppColors.whiteColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(6)),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                color: AppColors.greenColor,
+                              ),
+                            ),
+                            onChanged: (text) {
+                              controller.search(text);
+                            },
+                          )),
+                        ],
                       ),
-                    ],
-                body: Obx(() {
-                  if (controller.isLoading.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                ),
+              ];
+            }, body: Obx(() {
+              if (controller.isLoading.value) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                if (controller.isFailed.value) {
+                  return Center(
+                    child: Text('Unexpected error has occurred'.tr),
+                  );
+                } else {
+                  if (controller.displayedSurahs.isEmpty) {
+                    return Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGreenColor.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(0.05.sw),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.search_off),
+                              Text(
+                                'No results found.'.tr,
+                                style: TextThemes.mediumSubTitle,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     );
                   } else {
-                    if (controller.isFailed.value) {
-                      return Center(
-                        child: Text('Unexpected error has occurred'.tr),
-                      );
-                    } else {
-                      if (controller.displayedSurahs.isEmpty) {
-                        return Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color:
-                                  AppColors.lightGreenColor.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(0.05.sw),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Icon(Icons.search_off),
-                                  Text(
-                                    'No results found.'.tr,
-                                    style: TextThemes.mediumSubTitle,
-                                  )
-                                ],
-                              ),
-                            ),
+                    return ListView.builder(
+                      itemCount: controller.displayedSurahs.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            controller.surahWidgetClicked(index);
+                          },
+                          child: SurahWidget(
+                            surahs: controller.displayedSurahs,
+                            index: index,
                           ),
                         );
-                      } else {
-                        return ListView.builder(
-                          itemCount: controller.displayedSurahs.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                controller.surahWidgetClicked(index);
-                              },
-                              child: SurahWidget(
-                                surahs: controller.displayedSurahs,
-                                index: index,
-                              ),
-                            );
-                          },
-                        );
-                      }
-                    }
+                      },
+                    );
                   }
-                })),
+                }
+              }
+            })),
           ],
         ),
       ),
