@@ -29,7 +29,7 @@ class ReaderController extends GetxController {
     pdfController = PdfController(
         document: PdfDocument.openAsset('assets/docs/$docId.pdf'),
         initialPage: initialPage,
-        viewportFraction: 2);
+        viewportFraction: 1);
   }
 
   onPageSearchClicked() {
