@@ -210,34 +210,8 @@ class SurahWidget extends StatelessWidget {
             border: Border.all(color: AppColors.borderColor),
             color: AppColors.background.withOpacity(0.75)),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            SizedBox(
-              width: 0.1.sw,
-              height: 0.1.sw,
-              child: SvgPicture.asset(
-                'assets/vectors/${surahs[index].place?.toLowerCase()}.svg',
-                fit: BoxFit.fill,
-              ),
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  surahs[index].titleAr ?? '',
-                  style: TextThemes.mediumSubTitle,
-                ),
-                Text(
-                  surahs[index].title ?? '',
-                  style: TextThemes.mediumSubTitle,
-                )
-              ],
-            ),
-            const Spacer(),
             Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -248,6 +222,35 @@ class SurahWidget extends StatelessWidget {
                   'Page'.tr,
                   style: TextThemes.smallSubTitle,
                 )
+              ],
+            ),
+
+            Row(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      surahs[index].titleAr ?? '',
+                      style: TextThemes.mediumSubTitle,
+                    ),
+                    Text(
+                      surahs[index].title ?? '',
+                      style: TextThemes.mediumSubTitle,
+                    )
+                  ],
+                ),
+               const  SizedBox(width: 15),
+                SizedBox(
+                  width: 0.1.sw,
+                  height: 0.09.sw,
+                  child: SvgPicture.asset(
+                    'assets/vectors/${surahs[index].place?.toLowerCase()}.svg',
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ],
             ),
           ],
